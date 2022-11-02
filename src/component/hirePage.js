@@ -21,7 +21,6 @@ const HirePage = () => {
         fecthTicketData(serText);
     }, [filterValue]);
     const fecthTicketData = async (searchStr) => {
-
         let data = { objects: [searchStr, filterValue] }
         console.log("filterValue received :", searchStr)
         await axios.post('http://localhost:8000/getStudentBySearch', data, {
@@ -34,11 +33,8 @@ const HirePage = () => {
                 console.log("errror", err);
             });
     };
-
     return (
-
         <>  <MainHome />
-
             <FilerDialogBox
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
@@ -48,7 +44,6 @@ const HirePage = () => {
             // setFilterPercentage
             // data={props}
             />
-
             {/* <Typography sx={{ fontSize: "18px", color: "#3B3B3B" }}>
                 Welcome{" "}
                 ,
@@ -76,7 +71,6 @@ const HirePage = () => {
                 <Grid item xm={12} sm={12} md={3} lg={3} textAlign="right">
                     <Button
                         variant="contained"
-
                         onClick={() => setOpenPopup(true)}
                         sx={{
                             backgroundColor: "blue",
@@ -114,7 +108,6 @@ const HirePage = () => {
                                 </TableCell>
                             </TableRow>
                         </TableHead>
-
                         <TableBody>
                             {studentData.length !== 0 ?
                                 studentData.map((data, i) => (
@@ -127,15 +120,10 @@ const HirePage = () => {
                                 ))
                                 : ""}
                         </TableBody>
-
                     </Table>
                 </TableContainer>
             </Box>
-
-
         </>
-
     )
 }
-
 export default HirePage
