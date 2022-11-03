@@ -45,7 +45,7 @@ export default function RegisterUser() {
 
         const fecthHandler = async () => {
             return await axios
-                .get(`http://localhost:8000/getDataById/${id}`)
+                .get(`/getDataById/${id}`)
                 .then((res) => res.data)
                 .then((data) => {
                     setInput(data.student);
@@ -70,7 +70,7 @@ export default function RegisterUser() {
 
         console.log(input);
         try {
-            await axios.post("http://localhost:8000/sign-up", {
+            await axios.post("/sign-up", {
                 name: String(input.name), aadharId: Number(input.aadharId),
                 email: String(input.email), mobile: String(input.mobile),
                 percentage: Number(input.percentage), interested: String(input.interested),
@@ -98,7 +98,7 @@ export default function RegisterUser() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8000/update-student/${id}`, {
+            await axios.put(`/update-student/${id}`, {
                 name: String(input.name), aadharId: Number(input.aadharId), email: String(input.email), mobile: String(input.mobile), percentage: Number(input.percentage), interested: String(input.interested), graduation: String(input.graduation), collegeID: String(collegeID._id), age: Number(input.age), enrolYear: Number(input.enrolYear), highSchool: Number(input.highSchool), address: String(input.address), fatherName: String(input.fatherName), motherName: String(input.motherName), pincode: Number(input.pincode), backlogs: String(input.backlogs), languages: String(input.languages)
             }).then((res) => {
                 console.log("res", res);

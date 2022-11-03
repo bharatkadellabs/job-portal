@@ -47,7 +47,7 @@ export default function CollegeRegister() {
     const handlerSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8000/college-data ", {
+            await axios.post("/college-data ", {
                 cName: String(input.cName), cEmail: String(input.cEmail),
                 password: String(input.password), cNumber: String(input.cNumber), icit: Boolean(checkbox),
                 address: String(input.address), city: String(input.city), state: String(input.state)

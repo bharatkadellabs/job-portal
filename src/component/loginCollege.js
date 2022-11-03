@@ -69,7 +69,7 @@ export default function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(input, "hiii");
-        const collegeLogin = await axios.post("http://localhost:8000/login-college", { email: String(input.email), password: String(input.password) });
+        const collegeLogin = await axios.post("/login-college", { email: String(input.email), password: String(input.password) });
         console.log("response@@@@@@", collegeLogin)
         if (collegeLogin.status === 201) {
             const collegeData = JSON.stringify(collegeLogin.data.collegeLoginData);

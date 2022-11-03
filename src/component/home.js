@@ -44,7 +44,7 @@ const Home = ({ loggedIn }) => {
     }, [])
 
     const getStudentData = async () => {
-        await axios.get('http://localhost:8000/getStudent').then((res) => {
+        await axios.get('/getStudent').then((res) => {
             console.log(res);
             setStudentData(res.data)
         })

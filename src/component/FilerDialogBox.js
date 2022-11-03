@@ -80,7 +80,7 @@ export default function CustomizedDialogs({ openPopup, setOpenPopup, setFilterDa
     }, [])
 
     const getCollegeName = async () => {
-        await axios.get("http://localhost:8000/getCollegeData").then((res) => {
+        await axios.get("/getCollegeData",).then((res) => {
             setCollegeData(res.data.data)
         })
     }

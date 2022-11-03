@@ -71,7 +71,7 @@ export default function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(input, "hiii");
-        await axios.post("http://localhost:8000/login-data", { email: String(input.email), password: String(input.password) }).then((res) => {
+        await axios.post("/login-data", { email: String(input.email), password: String(input.password) }).then((res) => {
             console.log(res)
             if (res.status === "406") {
                 console.log("<LLKJDJDJ")

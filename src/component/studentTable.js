@@ -19,7 +19,7 @@ const Book = (props) => {
 
     const deleteHandler = async () => {
         await axios
-            .delete(`http://localhost:8000/student/${_id}`).then((res) => res.data);
+            .delete(`/student/${_id}`).then((res) => res.data);
         window.location.reload(false)
     }
     return (

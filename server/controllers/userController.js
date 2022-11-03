@@ -100,59 +100,23 @@ const updateStudent = async (req, res, next) => {
     return res.status(200).json({ message: 'Update Succesfully', student });
 };
 const getStudentBySearch = async (req, res) => {
-    console.log("dfd", JSON.stringify(req.body).objects)
-    const searchString = req.body.objects[0];
-    const filterValue = req.body.objects[1];
-    console.log("@@@@@@@@@@@@@@@@@@@@", req.body.objects[0]);
-    const regex = new RegExp(searchString, "i");
-    console.log("regex", searchString, 'and ', filterValue);
-    // if (searchString) {
-    //     await User
-    //         .find({ name: regex })
-    //         // .find({ $and: Query })
-    //         .then((result) => {
-    //             // console.log(result)
-    //             return res.status(200).json({ message: "data fetched succesfully", data: result });
-    //         })
-    //         .catch((err) => {
-    //             console.log()
-    //             return res.status(500).json({ mesage: "something went wrong", description: err });
-    //         });
-    // }
-    if (filterValue != null) {
-        const collegeNameFilterValue = filterValue.filterCollegeName;
-        const courseFilterValue = filterValue.filterCourse;
-        const percentageFilterValue = filterValue.filterPercentage;
-        console.log(collegeNameFilterValue, "ssss")
-        let Query = [{ percentage: { $gt: percentageFilterValue } }];
-        if (collegeNameFilterValue.length != 0) {
-            Query.push({ collegeID: { $in: collegeNameFilterValue } })
-            // Query = { $and: [{ collegeID: { $in: collegeNameFilterValue } }, { percentage: { $gt: percentageFilterValue } }, { graduation: { $in: courseFilterValue } }] }
-        }
-        if (courseFilterValue.length != 0) {
-            Query.push({ graduation: { $in: courseFilterValue } })
-        }
-        console.log('first', Query)
-        try {
-            await User
-                // .find({ name: regex })
-                .find({ $and: Query })
-                .then((result) => {
-                    // console.log(result)
-                    return res.status(200).json({ message: "data fetched succesfully", data: result });
-                })
-
-        } catch (error) {
-            return res.status(500).json({ message: "Something went Wrong", describe: error });
-
-        }
+    console.log('body', req.body)
+    const { search, colleges, courses, percentage } = req.body
+    const regex = new RegExp(search, "i");
+    console.log('red', regex)
+    let Query = [{ name: regex }]
+    if (colleges.length !== 0) {
+        Query.push({ collegeID: { $in: colleges } })
     }
-
-
+    if (courses.length !== 0) {
+        Query.push({ graduation: { $in: courses } })
+    }
+    Query.push({ percentage: { $gt: percentage } })
+    // console.log('first', Query)
     // Query = { $and: [{ collegeID: { $in: collegeNameFilterValue } }, { percentage: { $gt: percentageFilterValue } }, { graduation: { $in: courseFilterValue } }] }
     try {
         await User
-            .find({ name: regex })
+            .find({ $and: Query })
             // .find({ $and: Query })
             .then((result) => {
                 // console.log(result)
@@ -162,6 +126,8 @@ const getStudentBySearch = async (req, res) => {
         return res.status(500).json({ message: "Something went Wrong", describe: error });
 
     }
+
+
 }
 exports.updateStudent = updateStudent;
 exports.deleteProduct = deleteProduct;
