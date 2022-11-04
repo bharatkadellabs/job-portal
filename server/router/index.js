@@ -13,7 +13,7 @@ router.get('/getStudent', userController.getData)
 router.delete('/student/:deleteId', userController.deleteProduct)
 router.get('/getDataById/:id', userController.getDataById)
 router.post('/getStudentBySearch', userController.getStudentBySearch)
-router.get('/getCollegeData',collegeController.getCollegeData)
+router.get('/getCollegeData', collegeController.getCollegeData)
 
 // router.get('/', userController);
 module.exports = router;
