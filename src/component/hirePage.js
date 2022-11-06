@@ -11,6 +11,7 @@ import FilerDialogBox from "./FilerDialogBox";
 const HirePage = () => {
     let serText = "";
     const [studentData, setStudentData] = useState([]);
+    console.log("studentData", studentData)
     const [openPopup, setOpenPopup] = useState(false);
     const [filterValue, setFilterData] = useState();
     // const [filterCollegeName, setFilterCollegeName] = React.useState([])
@@ -123,7 +124,7 @@ const HirePage = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {studentData.length !== 0
+                            {studentData.length != 0
                                 ? studentData.map((data, i) => (
                                     <TableRow key={i}>
                                         <TableCell align="center" scope="row">
