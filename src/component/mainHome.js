@@ -35,17 +35,17 @@ function DrawerAppBar(props) {
             <List>
 
                 <ListItem disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
+                    <ListItemButton component={Link} to={'/home'} sx={{ textAlign: 'center' }}>
                         <ListItemText primary="Hire Students" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
+                    <ListItemButton component={Link} to={'/college-register'} sx={{ textAlign: 'center' }}>
                         <ListItemText primary="COllege Registrion" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
+                    <ListItemButton component={Link} to={'/login-college'} sx={{ textAlign: 'center' }}>
                         <ListItemText primary="College Login" />
                     </ListItemButton>
                 </ListItem>

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
 const collegeController = require('../controllers/collegeController')
+router.get("/", (req, res) => res.send("Hello World"));
 router.get('/user', (req, res) => res.send("hello world"));
 router.post('/sign-up', userController.signUpUser)
 router.put('/update-student/:id', userController.updateStudent);
