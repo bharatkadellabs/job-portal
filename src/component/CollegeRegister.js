@@ -13,7 +13,6 @@ import toast, { Toaster } from "react-hot-toast";
 import MainHome from '../component/mainHome';
 import useResponsive from "../hooks/useResponsive";
 import welcomeImage from "../Assets/images/wq.png";
-
 const RootStyle = styled("div")(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
         display: "flex",
@@ -67,7 +66,6 @@ const steps = ["Shipping address", "Payment details", "Review your order"];
 const theme = createTheme();
 export default function CollegeRegister() {
     const mdUp = useResponsive("up", "md");
-
     let [input, setInput] = React.useState({});
     let [checkbox, setCheckbox] = React.useState(true);
     console.log("check", checkbox);
@@ -89,7 +87,6 @@ export default function CollegeRegister() {
             }).then((res) => {
                 console.log("res", res)
                 if (res.status == 201) {
-
                     toast.success(res.data.message);
                 }
                 toast.error(res.data.message);
@@ -98,7 +95,6 @@ export default function CollegeRegister() {
             console.log(err)
             toast.error(err.message);
         }
-
     };
     return (
         <>
@@ -136,7 +132,6 @@ export default function CollegeRegister() {
                                         <Grid item xs={12} md={6} xl={6}>
                                             <TextField onChange={handleTextFiled} required type="email" name="cEmail" label="College Email ID" fullWidth variant="standard" />
                                         </Grid>
-
                                         <Grid item xs={12}>
                                             <FormLabel component="legend">Are You Belog to</FormLabel>
                                             <FormControlLabel
@@ -149,7 +144,7 @@ export default function CollegeRegister() {
                                                         defaultChecked={checkbox}
                                                     />
                                                 }
-                                                label="ICIT "
+                                                label="AICTE"
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -169,18 +164,11 @@ export default function CollegeRegister() {
                                     </Grid>
                                 </Stack>
                             </form>
-                            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                                Don’t have an account?{" "}
-                                <Link variant="subtitle2" component={RouterLink} to="/register-form">
-                                    Get started
-                                </Link>
-                            </Typography>
                         </ContentStyle>
                     </Container>
                 </RootStyle>
             </Box>
         </>
-
     );
     // return (
     //     <ThemeProvider theme={theme} >

@@ -9,8 +9,10 @@ const getData = async (req, res) => {
 }
 const signUpUser = async (req, res) => {
 
-    const { name, email, mobile, aadharId, percentage, graduation, interested, collegeID, age, enrolYear, highSchool,
-        address, fatherName, motherName, pincode, backlogs, languages } = req.body;
+    const { name,
+        aadharId,
+        email, mobile, percentage, interested, graduation, collegeID, dob, enrolYear, highSchool,
+        address, fatherName, motherName, pincode, backlogs, languages, secSchool, hobbies, skills, stream, activities, internships } = req.body;
     const emailExsting = await User.findOne({ email: email })
     if (!emailExsting) {
         try {
@@ -18,8 +20,8 @@ const signUpUser = async (req, res) => {
             userData = new User({
                 name,
                 aadharId,
-                email, mobile, percentage, interested, graduation, collegeID, age, enrolYear, highSchool,
-                address, fatherName, motherName, pincode, backlogs, languages
+                email, mobile, percentage, interested, graduation, collegeID, dob, enrolYear, highSchool,
+                address, fatherName, motherName, pincode, backlogs, languages, secSchool, hobbies, skills, stream, activities, internships
             })
             await userData.save();
             if (!userData) {
@@ -82,11 +84,16 @@ const getDataById = async (req, res) => {
 const updateStudent = async (req, res, next) => {
     const id = req.params.id;
     console.log("id", id)
-    const { name, email, mobile, aadharId, percentage, graduation, interested, collegeID } = req.body;
-    let student;
+    const { name,
+        aadharId,
+        email, mobile, percentage, interested, graduation, collegeID, dob, enrolYear, highSchool,
+        address, fatherName, motherName, pincode, backlogs, languages, secSchool, hobbies, skills, stream, activities, internships } = req.body; let student;
     try {
         student = await User.findByIdAndUpdate(id, {
-            name, email, mobile, aadharId, percentage, graduation, interested, collegeID
+            name,
+            aadharId,
+            email, mobile, percentage, interested, graduation, collegeID, dob, enrolYear, highSchool,
+            address, fatherName, motherName, pincode, backlogs, languages, secSchool, hobbies, skills, stream, activities, internships
         })
         student = await student.save()
 

@@ -14,18 +14,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link, Outlet } from 'react-router-dom';
-
 const drawerWidth = 240;
 // const navItems = [{ text: "College Login" }, { text: "College Regi" }, { text: "Hire Student" }];
-
 function DrawerAppBar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2 }}>
@@ -33,7 +29,6 @@ function DrawerAppBar(props) {
             </Typography>
             <Divider />
             <List>
-
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to={'/home'} sx={{ textAlign: 'center' }}>
                         <ListItemText primary="Hire Students" />
@@ -41,7 +36,7 @@ function DrawerAppBar(props) {
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to={'/college-register'} sx={{ textAlign: 'center' }}>
-                        <ListItemText primary="COllege Registrion" />
+                        <ListItemText primary="College Registration" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -49,13 +44,10 @@ function DrawerAppBar(props) {
                         <ListItemText primary="College Login" />
                     </ListItemButton>
                 </ListItem>
-
             </List>
         </Box>
     );
-
     const container = window !== undefined ? () => window().document.body : undefined;
-
     return (
         <Box>
             <AppBar component="nav">
@@ -77,16 +69,14 @@ function DrawerAppBar(props) {
                         JOB PORTAL
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-
                         <Button component={Link} to={'/home'} sx={{ color: '#fff' }}>
                             Hire Students
                         </Button>
                         <Button component={Link} to={'/college-register'} sx={{ color: '#fff' }}>
-                            COllege Registrion
+                            College Registration
                         </Button>
                         <Button component={Link} to={'/login-college'} sx={{ color: '#fff' }}>
                             College Login</Button>
-
                     </Box>
                 </Toolbar>
             </AppBar>
@@ -108,13 +98,10 @@ function DrawerAppBar(props) {
                 </Drawer>
             </Box>
             <Box sx={{ marginTop: '60px' }}>
-
-
             </Box>
         </Box>
     );
 }
-
 DrawerAppBar.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
@@ -122,5 +109,4 @@ DrawerAppBar.propTypes = {
      */
     window: PropTypes.func,
 };
-
 export default DrawerAppBar;

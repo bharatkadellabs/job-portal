@@ -4,52 +4,96 @@ var Schema = mongoose.Schema;
 const userSchema = Schema({
     name: {
         type: String,
-        require: true
+        require: true,
     },
     aadharId: {
         type: Number,
-        require: true
+        require: true,
     },
     email: {
         type: String,
-        require: true
+        require: true,
     },
     mobile: {
         type: Number,
-        require: true
+        require: true,
     },
     percentage: {
         type: Number,
+        require: true,
     },
     interested: {
         type: Array,
+        require: true,
     },
     graduation: {
         type: String,
+        require: true,
     },
     collegeID: {
         type: String,
+        require: true,
     },
-    age: {
+    dob: {
+        type: Date,
+        require: true,
+    },
+    enrolYear: {
         type: Number,
-    }, enrolYear: {
+        require: true,
+    },
+    highSchool: {
         type: Number,
-    }, highSchool: {
-        type: Number,
+        require: true,
     },
     address: {
         type: String,
-    }, fatherName: {
+        require: true,
+    },
+    fatherName: {
         type: String,
-    }, motherName: {
+        require: true,
+    },
+    motherName: {
         type: String,
-    }, pincode: {
+        require: true,
+    },
+    pincode: {
         type: Number,
-    }, backlogs: {
+        require: true,
+    },
+    backlogs: {
+        type: Number,
+        require: true,
+    },
+    languages: {
         type: String,
-    }, languages: {
+        require: true,
+    },
+    hobbies: {
         type: String,
-    }
+        require: true,
+    },
+    secSchool: {
+        type: Number,
+        require: true,
+    },
+    activities: {
+        type: String,
+        require: true,
+    },
+    stream: {
+        type: String,
+        require: true,
+    },
+    skills: {
+        type: String,
+        require: true,
+    },
+    internships: {
+        type: String,
+        require: true,
+    },
 });
-module.exports.User = mongoose.model('user', userSchema, 'user');
+module.exports.User = mongoose.model("user", userSchema, "user");
 // module.exports.userModel = mongoose.model("users", userSchema, "users");
