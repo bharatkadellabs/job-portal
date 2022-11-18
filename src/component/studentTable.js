@@ -10,12 +10,20 @@ import { useState } from 'react'
 // const click_show_product_details = () => {
 //     return <ProductDetailsPage />
 // }
+
 const Book = (props) => {
+
     // const navigate = useNavigate();
 
     const { _id, name, aadharId, email, mobile } = props.products
     // -----for dialogbox product detail
     const [openPopup, setOpenPopup] = useState(false)
+    var str = aadharId;
+
+    var trailingCharsIntactCount = 4;
+    str = new Array(str.length - trailingCharsIntactCount + 1).join('x') + str.slice(-trailingCharsIntactCount);
+
+    console.log(str);
 
     const deleteHandler = async () => {
         await axios
@@ -24,10 +32,10 @@ const Book = (props) => {
     }
     return (
         <>
-            <TableCell align="center">{name}</TableCell>
-            <TableCell align="center">{email}</TableCell>
+            <TableCell align="center" style={{ textTransform: 'capitalize' }}>{name}</TableCell>
+            <TableCell align="center" style={{ textTransform: 'capitalize' }}>{email}</TableCell>
             <TableCell align="center">
-                {aadharId}
+                {str}
             </TableCell>
             <TableCell align="center">
                 {mobile}

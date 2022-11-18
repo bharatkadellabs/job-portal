@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 // @mui
 import { styled } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
@@ -7,7 +7,7 @@ import { Card, Link, Container, Typography, Box, TextField, Stack, IconButton, I
 // hooks
 import useResponsive from "../hooks/useResponsive";
 import welcomeImage from "../Assets/images/illustration_login.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -56,9 +56,18 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [input, setInput] = useState({});
     const navigate = useNavigate();
+    const location = useLocation();
     const handleClickShowPassword = () => {
         setShowPassword(true);
     };
+    useEffect(() => {
+
+        if (location && location.state) {
+            toast.success(location.state.message)
+        }
+        console.log(location)
+
+    }, [])
     const handlerTextFiled = (event) => {
         setInput((prevState) => ({
             ...prevState,
@@ -84,6 +93,7 @@ export default function Login() {
     };
     return (
         <>
+            <Toaster />
             <MainHome />
             <Box title="Login" sx={{ backgroundColor: "#F8F8FF" }}>
                 <Toaster />

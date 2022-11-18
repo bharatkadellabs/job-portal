@@ -7,7 +7,7 @@ const userSchema = Schema({
         require: true,
     },
     aadharId: {
-        type: Number,
+        type: String,
         require: true,
     },
     email: {

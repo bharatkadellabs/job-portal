@@ -24,22 +24,31 @@ const signInUser = async (req, res) => {
     }
 }
 const addCollege = async (req, res) => {
-    console.log("addcollge", req.body)
     const { cName, cEmail, cNumber, password, address, city, state, icit } = req.body;
-    try {
-        let collegeData;
-        collegeData = new CollegeSchema({
-            cName, cEmail, cNumber, password, address, city, state, icit
-        })
-        await collegeData.save();
-        if (!collegeData) {
-            return res.status(406).json({ message: "Unable To Add Collega Data" })
+    console.log("addcollge", req.body)
+    const emailExsting = await CollegeSchema.findOne({ cEmail: cEmail });
+    console.log("!@!@!!@!", emailExsting)
+    if (!emailExsting) {
+        try {
+            let collegeData;
+            collegeData = new CollegeSchema({
+                cName, cEmail, cNumber, password, address, city, state, icit
+            })
+            await collegeData.save();
+            if (!collegeData) {
+                return res.status(406).json({ message: "Unable To Add Collega Data" })
+            }
+            return res.status(201).json({ message: "Succesfully Registration.." })
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ message: err })
         }
-        return res.status(201).json({ message: "Succesfully Registration.." })
-    } catch (err) {
-        console.log(err)
-        return res.status(500).json({ message: err })
     }
+    if (emailExsting) {
+        return res.status(406).json({ message: "College email is already exists." })
+    }
+
+
 }
 const getCollegeData = async (req, res) => {
     const data = await CollegeSchema.find()

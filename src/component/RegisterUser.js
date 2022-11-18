@@ -95,7 +95,7 @@ export default function RegisterUser() {
 
         try {
             await axios.post("/sign-up", {
-                name: String(input.name), aadharId: Number(input.aadharId),
+                name: String(input.name), aadharId: String(input.aadharId),
                 email: String(input.email), mobile: String(input.mobile),
                 percentage: Number(input.percentage), interested: String(input.interested),
                 graduation: String(input.graduation), collegeID: String(collegeID._id),
@@ -131,7 +131,7 @@ export default function RegisterUser() {
         e.preventDefault();
         try {
             await axios.put(`/update-student/${id}`, {
-                name: String(input.name), aadharId: Number(input.aadharId),
+                name: String(input.name), aadharId: String(input.aadharId),
                 email: String(input.email), mobile: String(input.mobile),
                 percentage: Number(input.percentage), interested: String(input.interested),
                 graduation: String(input.graduation), collegeID: String(collegeID._id),
@@ -215,7 +215,7 @@ export default function RegisterUser() {
                                         <TextField onChange={handleChange} fullWidth value={input.motherName} name="motherName" required label="Mother Name" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField required onChange={handleChange} fullWidth value={input.aadharId} name="aadharId" type="number" label="Aadhar Card Number" />
+                                        <TextField required inputProps={{ maxLength: 12, minLength: 12 }} onChange={handleChange} fullWidth value={input.aadharId} name="aadharId" type="text" label="Aadhar Card Number" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
                                         <TextField required onChange={handleChange} fullWidth value={input.email} label="Email Address" name="email" />
@@ -357,7 +357,9 @@ export default function RegisterUser() {
                                         <TextField onChange={handleChange} fullWidth value={input.motherName} name="motherName" required label="Mother Name" InputLabelProps={{ shrink: true }} />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField required onChange={handleChange} fullWidth value={input.aadharId} name="aadharId" type="number" label="Aadhar Card Number" InputLabelProps={{ shrink: true }} />
+                                        <TextField required onChange={handleChange} fullWidth value={input.aadharId} name="aadharId" type="text" label="Aadhar Card Number" InputLabelProps={{ shrink: true }} InputProps={{
+                                            maxLength: 12, minLength: 12
+                                        }} />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
                                         <TextField required onChange={handleChange} fullWidth value={input.email} label="Email Address" name="email" InputLabelProps={{ shrink: true }} />

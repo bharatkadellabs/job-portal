@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate, } from "react-router-dom";
 import React from "react";
 import { Stack, Card, Box, Grid, TextField, Checkbox, FormControlLabel, Divider, FormGroup, FormLabel } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -68,6 +68,7 @@ export default function CollegeRegister() {
     const mdUp = useResponsive("up", "md");
     let [input, setInput] = React.useState({});
     let [checkbox, setCheckbox] = React.useState(true);
+    const navigate = useNavigate();
     console.log("check", checkbox);
     const handleTextFiled = (e) => {
         setInput((prevState) => ({
@@ -85,15 +86,19 @@ export default function CollegeRegister() {
                 password: String(input.password), cNumber: String(input.cNumber), icit: Boolean(checkbox),
                 address: String(input.address), city: String(input.city), state: String(input.state)
             }).then((res) => {
-                console.log("res", res)
-                if (res.status == 201) {
-                    toast.success(res.data.message);
+                console.log("res", res);
+                if (res.status === 201) {
+                    console.log("in res ", res);
+                    // toast.success(res.data.message);
+                    navigate("/login-college", {
+                        state: { message: res.data.message, status: res.status },
+                    });
+                } else {
+                    toast.error(res.data.message);
                 }
-                toast.error(res.data.message);
-            })
+            });
         } catch (err) {
-            console.log(err)
-            toast.error(err.message);
+            toast.error(err.response.data.message);
         }
     };
     return (

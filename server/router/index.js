@@ -10,6 +10,8 @@ router.post('/login-data', userController.signInUser)
 router.post('/login-college', collegeController.signInUser)
 router.post('/college-data', collegeController.addCollege)
 router.get('/getStudent', userController.getData)
+router.post('/getStudentByCollege', userController.getDataByCollege)
+
 router.delete('/student/:deleteId', userController.deleteProduct)
 router.get('/getDataById/:id', userController.getDataById)
 router.post('/getStudentBySearch', userController.getStudentBySearch)

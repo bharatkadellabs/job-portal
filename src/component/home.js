@@ -44,7 +44,11 @@ const Home = ({ loggedIn }) => {
     }, [])
 
     const getStudentData = async () => {
-        await axios.get('/getStudent').then((res) => {
+        let collegeID = JSON.parse(sessionStorage.getItem('collegeID'))
+        console.log("sasas", collegeID, "@@@@@", collegeID._id)
+        let data = { CID: collegeID._id }
+        console.log("!!!!1", data)
+        await axios.post('/getStudentByCollege', data).then((res) => {
             console.log(res);
             setStudentData(res.data)
         })

@@ -2,8 +2,15 @@ const express = require('express');
 const app = express.Router();
 const mongoose = require('mongoose');
 const { User } = require('../model/userSchema');
+
 const getData = async (req, res) => {
     const studentData = await User.find();
+
+    return res.status(201).json(studentData);
+}
+const getDataByCollege = async (req, res) => {
+    const { CID } = req.body
+    const studentData = await User.find({ collegeID: CID });
     console.log(studentData)
     return res.status(201).json(studentData);
 }
@@ -83,7 +90,7 @@ const getDataById = async (req, res) => {
 }
 const updateStudent = async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id)
+
     const { name,
         aadharId,
         email, mobile, percentage, interested, graduation, collegeID, dob, enrolYear, highSchool,
@@ -107,10 +114,8 @@ const updateStudent = async (req, res, next) => {
     return res.status(200).json({ message: 'Update Succesfully', student });
 };
 const getStudentBySearch = async (req, res) => {
-    console.log('body', req.body)
     const { search, colleges, courses, percentage } = req.body
     const regex = new RegExp(search, "i");
-    console.log('red', regex)
     let Query = [{ name: regex }]
     if (colleges.length !== 0) {
         Query.push({ collegeID: { $in: colleges } })
@@ -143,3 +148,4 @@ exports.signInUser = signInUser;
 exports.getData = getData;
 exports.getDataById = getDataById;
 exports.getStudentBySearch = getStudentBySearch;
+exports.getDataByCollege = getDataByCollege;
