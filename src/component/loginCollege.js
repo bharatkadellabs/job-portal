@@ -61,12 +61,10 @@ export default function Login() {
         setShowPassword(true);
     };
     useEffect(() => {
-
         if (location && location.state) {
             toast.success(location.state.message)
         }
         console.log(location)
-
     }, [])
     const handlerTextFiled = (event) => {
         setInput((prevState) => ({
@@ -79,7 +77,6 @@ export default function Login() {
         event.preventDefault();
         console.log(input, "hiii");
         const collegeLogin = await axios.post("/login-college", { email: String(input.email), password: String(input.password) });
-        console.log("response@@@@@@", collegeLogin)
         if (collegeLogin.status === 201) {
             const collegeData = JSON.stringify(collegeLogin.data.collegeLoginData);
             sessionStorage.setItem("collegeID", collegeData);
@@ -102,7 +99,7 @@ export default function Login() {
                     {mdUp && (
                         <SectionStyle sx={{ height: "95vh", maxWidth: "500px", borderRadius: "16px" }}>
                             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 10 }}>
-                                Hi College, Welcome Back
+                                Job Search
                             </Typography>
                             <img src={welcomeImage} sx={{ width: "100%" }} alt="login" />
                         </SectionStyle>
@@ -135,7 +132,7 @@ export default function Login() {
                                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
                                     {/* <RHFCheckbox name="remember" label="Remember me" /> */}
                                     <Link variant="subtitle2" underline="hover">
-                                        Forgot password?
+
                                     </Link>
                                 </Stack>
                                 <Button fullWidth size="large" type="submit" variant="contained">
@@ -144,7 +141,7 @@ export default function Login() {
                             </form>
                             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                                 Don’t have an account?{" "}
-                                <Link variant="subtitle2" component={RouterLink} to="/register-form">
+                                <Link variant="subtitle2" component={RouterLink} to="/college-register">
                                     Get started
                                 </Link>
                             </Typography>
@@ -153,6 +150,5 @@ export default function Login() {
                 </RootStyle>
             </Box>
         </>
-
     );
 }

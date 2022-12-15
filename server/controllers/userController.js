@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const mongoose = require('mongoose');
 const { User } = require('../model/userSchema');
+const EmailSend = require("../services/Nodemailer");
 
 const getData = async (req, res) => {
     const studentData = await User.find();
@@ -141,6 +142,13 @@ const getStudentBySearch = async (req, res) => {
 
 
 }
+const sendMail = async (req, res) => {
+
+    const { data } = req.body;
+
+    await EmailSend.Nodemailer(data);
+    return res.json({ message: 'hiii' })
+}
 exports.updateStudent = updateStudent;
 exports.deleteProduct = deleteProduct;
 exports.signUpUser = signUpUser;
@@ -149,3 +157,4 @@ exports.getData = getData;
 exports.getDataById = getDataById;
 exports.getStudentBySearch = getStudentBySearch;
 exports.getDataByCollege = getDataByCollege;
+exports.sendMail = sendMail;

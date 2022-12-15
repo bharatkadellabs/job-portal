@@ -16,5 +16,6 @@ router.delete('/student/:deleteId', userController.deleteProduct)
 router.get('/getDataById/:id', userController.getDataById)
 router.post('/getStudentBySearch', userController.getStudentBySearch)
 router.get('/getCollegeData', collegeController.getCollegeData)
+router.post('/send-Mail', userController.sendMail);
 // router.get('/', userController);
 module.exports = router;

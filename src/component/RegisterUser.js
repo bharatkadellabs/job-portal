@@ -209,7 +209,7 @@ export default function RegisterUser() {
                                         <TextField onChange={handleChange} fullWidth value={input.name} name="name" required label="Full Name" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField onChange={handleChange} fullWidth value={input.fatherName} name="fatherName" required label="Fater Name" />
+                                        <TextField onChange={handleChange} fullWidth value={input.fatherName} name="fatherName" required label="Father Name" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
                                         <TextField onChange={handleChange} fullWidth value={input.motherName} name="motherName" required label="Mother Name" />
@@ -227,7 +227,7 @@ export default function RegisterUser() {
                                         <TextField onChange={handleChange} fullWidth value={input.dob} name="dob" label="Date Of Birth" type="date" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField onChange={handleChange} fullWidth value={input.percentage} name="percentage" label="Aggregate" type="number" />
+                                        <TextField onChange={handleChange} fullWidth value={input.percentage} name="percentage" label="Aggregate " type="number" />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
                                         <TextField onChange={handleChange} fullWidth value={input.secSchool} name="secSchool" label="10th Percentage (%)" type="number" />

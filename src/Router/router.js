@@ -10,19 +10,15 @@ import MainHome from '../component/mainHome';
 import RequireAuth from '../component/RequireAuth';
 import HirePage from '../component/hirePage';
 export const Router = () => {
-
     return (
         <>
-
             <Switch>
                 {/* <Route path='/home' element={<MainHome />}></Route> */}
                 {/* public Route */}
-
                 <Route path='/login-college' element={<LoginCollege />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/college-register' element={<CollegeRegister />} />
                 <Route path='/home' element={<HirePage />} />
-
                 {/* private route */}
                 <Route element={<RequireAuth />}>
                     <Route path='/' element={<Dashboard loggedIn />} >
@@ -33,7 +29,6 @@ export const Router = () => {
                 </Route>
                 {/* <Route path='/register-form' exact element={<RegisterUser />} /> */}
             </Switch>
-
         </>
     )
 }

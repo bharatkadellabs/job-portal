@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Button, Checkbox, Chip, FormControlLabel, Grid, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -6,24 +6,48 @@ import MainHome from "../component/mainHome";
 import StudentTable from "../component/studentTable";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";
 import FilerDialogBox from "./FilerDialogBox";
+import SendIcon from '@mui/icons-material/Send';
+import TakeCompanyDetails from "./AddCompanyDialog";
 const HirePage = () => {
     let serText = "";
-    const [studentData, setStudentData] = useState([]);
-    console.log("studentData", studentData)
+    let [studentData, setStudentData] = useState([]);
     const [openPopup, setOpenPopup] = useState(false);
     const [filterValue, setFilterData] = useState();
-    // const [filterCollegeName, setFilterCollegeName] = React.useState([])
-    // const [filterCourse, setFilterfilterCourse] = React.useState([])
-    // const [filterPercentage, setFilterPercentage] = React.useState({})
-    console.log("#", filterValue);
+    let [checked, setChecked] = useState([]);
+    const [isAllCheckMail, setisAllCheckMail] = useState(false)
+    const [isChecked, setisChecked] = useState([]);
+    const [addCompanyDialogOpen, setaddCompanyDialogOpen] = useState(false);
     useEffect(() => {
         fecthTicketData(serText);
     }, [filterValue]);
+    const handleCheckedAll = (e) => {
+        setisAllCheckMail(!isAllCheckMail);
+        setisChecked(studentData.map(li => li.email));
+        if (isAllCheckMail) {
+            setisChecked([])
+        }
+    }
+    const handleClick = e => {
+        console.log(e.target.value, e.target.checked)
+        const { value, checked } = e.target;
+        if (!checked) {
+            //remove
+            setisChecked(isChecked.filter(item => item !== value));
+        }
+        else {
+            //add
+            setisChecked([...isChecked, value]);
+        }
+    };
+    const handleDeleteClip = (email) => {
+        setisChecked(isChecked.filter(item => item !== email));
+    }
+    const sendMailButtonClick = () => {
+        setaddCompanyDialogOpen(true)
+
+    }
     const fecthTicketData = async (searchStr) => {
-        console.log("search string ::::", searchStr);
-        console.log("object string ::::", filterValue);
         let data = {
             search: searchStr || "",
             colleges: filterValue && filterValue.filterCollegeName || [],
@@ -32,17 +56,31 @@ const HirePage = () => {
         };
         console.log("filterValue received :", data);
         await axios.post('/getStudentBySearch', data).then((res) => {
-            console.log("@@@@@@@@@@@@@>>>>>>", res);
             setStudentData(res.data.data)
+            console.log(checked)
         })
             .catch((err) => {
                 console.log("errror", err);
             });
+        defaultSelectCehckbox();
     };
+    const defaultSelectCehckbox = () => {
+        console.log("!!!", studentData)
+        {
+            studentData.map((email) => {
+                console.log("hiaasas@@@@@a", email.email)
+                setChecked((prevstate) => ({
+                    ...prevstate, [email.email]: false
+                }
+                ));
+            })
+        }
+    }
     return (
         <>
             {" "}
             <MainHome />
+            <TakeCompanyDetails emails={isChecked} open={addCompanyDialogOpen} setClose={setaddCompanyDialogOpen} />
             <FilerDialogBox
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
@@ -50,15 +88,7 @@ const HirePage = () => {
                     console.log("filter itemss", d);
                     setFilterData(d);
                 }}
-            // setFilterCollegeName
-            // setFilterfilterCourse
-            // setFilterPercentage
-            // data={props}
             />
-            {/* <Typography sx={{ fontSize: "18px", color: "#3B3B3B" }}>
-                Welcome{" "}
-                ,
-            </Typography> */}
             <Box marginX={5} marginTop={"100px"} marginBottom={5}>
                 {" "}
                 <Grid container justifyContent={"space-between"}>
@@ -98,11 +128,41 @@ const HirePage = () => {
                     </Grid>
                 </Grid>
             </Box>
+            {isChecked.length != 0 ? <Box marginX={5} my={1} p={2} backgroundColor={'#FFFBCE'}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={10} lg={10} >
+                        <Stack direction="row" spacing={1}>
+                            {isChecked.map((email) => (
+                                <Chip
+                                    label={email}
+                                    variant="outlined"
+                                    onClick={handleClick}
+                                    onDelete={() => handleDeleteClip(email)}
+                                />
+                            ))}
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={12} md={2} lg={2}>
+                        <Button variant="contained" onClick={sendMailButtonClick} fullWidth color="success" endIcon={<SendIcon />} >Send Mail</Button>
+                    </Grid>
+                </Grid>
+            </Box> : ''}
             <Box marginX={5}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow style={{ backgroundColor: "#F4FBFF", fontWeight: 700 }}>
+                                <TableCell align="center" sx={{ fontWeight: 600 }}>
+                                    <FormControlLabel
+                                        label="Select All"
+                                        control={
+                                            <Checkbox
+                                                checked={isAllCheckMail}
+                                                onChange={handleCheckedAll}
+                                            />
+                                        }
+                                    />
+                                </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 600 }}>
                                     Index
                                 </TableCell>
@@ -127,6 +187,12 @@ const HirePage = () => {
                             {studentData.length != 0
                                 ? studentData.map((data, i) => (
                                     <TableRow key={i}>
+                                        <TableCell align="center" scope="row">
+                                            <FormControlLabel
+                                                value={data.email}
+                                                control={<Checkbox onChange={handleClick} checked={isChecked.includes(data.email)} value={data.email} />}
+                                            />
+                                        </TableCell>
                                         <TableCell align="center" scope="row">
                                             {i + 1}
                                         </TableCell>
