@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const { User } = require('../model/userSchema');
 const EmailSend = require("../services/Nodemailer");
 
+var cors = require('cors')
+const corsHandler = cors({ origin: true });
+
 const getData = async (req, res) => {
     const studentData = await User.find();
 
@@ -143,7 +146,8 @@ const getStudentBySearch = async (req, res) => {
 
 }
 const sendMail = async (req, res) => {
-
+    res.set('Access-Control-Allow-Origin', "*")
+    res.set('Access-Control-Allow-Methods', 'GET, POST')
     const { data } = req.body;
 
     await EmailSend.Nodemailer(data);
