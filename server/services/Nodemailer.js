@@ -14,7 +14,8 @@ const Nodemailer = async (data) => {
         secure: false, // true for 465, false for other ports
         auth: {
             user: "souravsh8908@gmail.com", // generated ethereal user
-            pass: "smnrptsxycqiinwv", // generated ethereal password
+            pass: "vttvugcinqpxjhsw", // generated ethereal password
+            // pass: "smnrptsxycqiinwv", // generated ethereal password
         },
     });
     // send mail with defined transport object
